@@ -78,7 +78,7 @@ export default function AdviceApp() {
   };
 
   // View 3 submission handler
-  const handleFormSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!submissionText.trim()) return;
 
