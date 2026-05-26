@@ -160,7 +160,7 @@ export default function AdviceApp() {
         </header>
 
         {/* 3-View Editorial Content Stage */}
-        <div className={`flex-1 flex flex-col min-h-[450px] ${viewAnimationClass}`}>
+        <div className={`flex-1 flex flex-col min-h-112.5 ${viewAnimationClass}`}>
           
           {/* =======================================================
               VIEW 1: SCENARIO GRID
@@ -266,7 +266,7 @@ export default function AdviceApp() {
               </div>
 
               {/* Monospace Metadata Panel & Action Blocks */}
-              <div className="flex flex-col md:flex-row border-t border-black bg-black/[0.01]">
+              <div className="flex flex-col md:flex-row border-t border-black bg-black/1">
                 
                 {/* Monospace Metadata */}
                 <div className="flex-1 p-6 font-mono text-[10px] space-y-2 border-b md:border-b-0 md:border-r border-black flex flex-col justify-center">
@@ -407,7 +407,7 @@ export default function AdviceApp() {
         </div>
 
         {/* Broadsheet Footnote */}
-        <footer className="border-t border-black p-6 flex flex-col md:flex-row justify-between items-center bg-black/[0.01] font-mono text-[10px] text-neutral-500">
+        <footer className="border-t border-black p-6 flex flex-col md:flex-row justify-between items-center bg-black/1 font-mono text-[10px] text-neutral-500">
           <div className="mb-2 md:mb-0">
             © 2026 ADVICE FOR WHEN. CODENAME: BROAD-GRID. RLS ARCHIVE ACTIVE.
           </div>
