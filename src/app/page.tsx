@@ -168,7 +168,7 @@ export default function AdviceApp() {
           {currentView === "grid" && (
             <div className="flex-1 flex flex-col">
               {/* Context bar */}
-              <div className="border-b border-black px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between font-mono text-xs bg-black/[0.02]">
+              <div className="border-b border-black px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between font-mono text-xs bg-black/2">
                 <span className="font-bold uppercase tracking-wider text-black">
                   [ STEP I: SELECT AN ACTIVE EXISTENTIAL SCENARIO ]
                 </span>
@@ -186,7 +186,7 @@ export default function AdviceApp() {
                       setSelectedScenario(scenario);
                       loadMessageForScenario(scenario);
                     }}
-                    className="group relative flex flex-col justify-between items-start text-left p-6 md:p-8 min-h-[140px] border-b border-black md:odd:border-r border-black bg-transparent hover:bg-black hover:text-[#FBFBFA] transition-colors duration-200 cursor-pointer"
+                    className="group relative flex flex-col justify-between items-start text-left p-6 md:p-8 min-h-35 border-b border-black md:odd:border-r bg-transparent hover:bg-black hover:text-[#FBFBFA] transition-colors duration-200 cursor-pointer"
                   >
                     {/* Index Identifier */}
                     <div className="w-full flex justify-between items-center font-mono text-xs opacity-50 group-hover:opacity-100 transition-opacity">
@@ -216,7 +216,7 @@ export default function AdviceApp() {
             <div className="flex-1 flex flex-col justify-between">
               
               {/* Back to Grid Header */}
-              <div className="border-b border-black flex items-center justify-between font-mono text-xs bg-black/[0.02]">
+              <div className="border-b border-black flex items-center justify-between font-mono text-xs bg-black/2">
                 <button
                   onClick={() => navigateToView("grid")}
                   className="px-6 py-4 font-bold border-r border-black hover:bg-black hover:text-[#FBFBFA] transition-colors cursor-pointer"
@@ -323,7 +323,7 @@ export default function AdviceApp() {
             <div className="flex-1 flex flex-col justify-between">
               
               {/* Back to message view */}
-              <div className="border-b border-black flex items-center justify-between font-mono text-xs bg-black/[0.02]">
+              <div className="border-b border-black flex items-center justify-between font-mono text-xs bg-black/2">
                 <button
                   onClick={() => navigateToView("message")}
                   className="px-6 py-4 font-bold border-r border-black hover:bg-black hover:text-[#FBFBFA] transition-colors cursor-pointer"
@@ -362,7 +362,7 @@ export default function AdviceApp() {
                   )}
 
                   {/* Wide Text Entry Viewport */}
-                  <div className="flex-1 min-h-[180px] border border-black relative bg-white">
+                  <div className="flex-1 min-h-45 border border-black relative bg-white">
                     <textarea
                       required
                       value={submissionText}
