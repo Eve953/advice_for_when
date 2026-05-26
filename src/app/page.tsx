@@ -171,7 +171,7 @@ export default function AdviceBoard() {
               {isLoading ? (
                 <div className="text-sm text-neutral-400 italic">Reaching for paper...</div>
               ) : (
-                <p className="text-2xl md:text-3xl font-serif text-neutral-800 leading-relaxed italic pr-2">
+                <p className="text-2xl md:text-3xl font-mono text-neutral-800 leading-relaxed  pr-2">
                   "{currentMessage ? currentMessage.message : "The board is empty here. Leave the first piece of writing for someone else."}"
                 </p>
               )}
@@ -237,7 +237,7 @@ export default function AdviceBoard() {
                 onChange={(e) => setSubmissionText(e.target.value)}
                 maxLength={280}
                 placeholder="What single sentence would you drop here for a complete stranger to look at?"
-                className="w-full grow bg-transparent border-none outline-none resize-none font-serif text-xl md:text-2xl text-neutral-800 italic placeholder-neutral-400 focus:ring-0 p-0 leading-relaxed"
+                className="w-full grow bg-transparent border-none outline-none resize-none font-mono text-xl md:text-2xl text-neutral-800  placeholder-neutral-400 focus:ring-0 p-0 leading-relaxed"
                 disabled={isLoading}
               />
             </div>

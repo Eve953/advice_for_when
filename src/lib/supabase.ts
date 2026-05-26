@@ -48,8 +48,7 @@ export async function fetchRandomMessageForScenario(scenario: string): Promise<A
       id: chosen.id,
       scenario: chosen.scenario,
       message: chosen.message,
-      // Fallback in case table has 'created_at' or missing timestamp column
-      timestamp: chosen.timestamp || (chosen as any).created_at || new Date().toISOString(),
+      timestamp: chosen.timestamp || new Date().toISOString(),
     };
   } catch (err) {
     console.warn(`Database connection or read failed. Gracefully falling back to mock data.`, err);
@@ -69,8 +68,7 @@ export async function insertMessageToSupabase(scenario: string, messageText: str
   const clientTimestamp = new Date().toISOString();
 
   try {
-    // Attempt inserting. We provide both 'timestamp' and 'created_at' to be resilient
-    // to whatever schema is configured in the Supabase 'messages' table.
+    // Fixed: Removed 'created_at' payload to match your database column schema ('timestamp')
     const { data, error } = await supabase
       .from("messages")
       .insert([
@@ -78,7 +76,6 @@ export async function insertMessageToSupabase(scenario: string, messageText: str
           scenario: scenario,
           message: messageText,
           timestamp: clientTimestamp,
-          created_at: clientTimestamp, // common Supabase default column name
         }
       ])
       .select();
