@@ -4,6 +4,14 @@ import React, { useState, useEffect } from "react";
 import { insertMessageToSupabase, fetchRandomMessageForScenario } from "@/lib/supabase";
 import { SCENARIOS } from "@/lib/mockData";
 
+declare global {
+  interface Window {
+    pendo?: {
+      track: (eventName: string, properties?: Record<string, unknown>) => void;
+    };
+  }
+}
+
 // Hardcoded non-robotic pastel array to give that true community board look
 const pastelColors = [
   { bg: "bg-[#FEF9E7]", text: "text-neutral-800", border: "border-[#F9E79F]" }, // Soft Canary
@@ -35,17 +43,40 @@ export default function AdviceBoard() {
     setIsLoading(true);
     setCurrentView("message");
 
+    const previousMessageId = currentMessage?.id || null;
+
     try {
       const data = await fetchRandomMessageForScenario(scenario);
       if (data) {
-        setCurrentMessage({
+        const newMessage = {
           id: String(data.id),
           scenario: data.scenario,
           message: data.message,
           created_at: data.timestamp
-        });
+        };
+        setCurrentMessage(newMessage);
+
+        if (scenario === selectedScenario && previousMessageId) {
+          window.pendo?.track("advice_refreshed", {
+            scenario,
+            previousMessageId,
+            newMessageId: String(data.id)
+          });
+        } else {
+          window.pendo?.track("advice_viewed", {
+            scenario,
+            messageId: String(data.id),
+            hasData: true,
+            source: "database"
+          });
+        }
       } else {
         setCurrentMessage(null);
+        window.pendo?.track("advice_viewed", {
+          scenario,
+          hasData: false,
+          source: "none"
+        });
       }
     } catch (err) {
       console.log("Using local fallback state for viewing experience.");
@@ -65,15 +96,29 @@ export default function AdviceBoard() {
     const success = await insertMessageToSupabase(selectedScenario, submissionText.trim());
 
     if (success) {
+      const trimmedText = submissionText.trim();
       setCurrentMessage({
         scenario: selectedScenario,
-        message: submissionText.trim(),
+        message: trimmedText,
         created_at: new Date().toISOString()
       });
       setSubmissionText("");
       setCurrentView("message");
+
+      window.pendo?.track("advice_submitted", {
+        scenario: selectedScenario,
+        messageLength: trimmedText.split(/\s+/).length,
+        characterCount: trimmedText.length
+      });
     } else {
-      setSubmissionError("Could not pin your note to the live database right now.");
+      const errorMessage = "Could not pin your note to the live database right now.";
+      setSubmissionError(errorMessage);
+
+      window.pendo?.track("advice_submission_failed", {
+        scenario: selectedScenario,
+        messageLength: submissionText.trim().split(/\s+/).length,
+        errorMessage
+      });
     }
     setIsLoading(false);
   };
