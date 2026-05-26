@@ -8,10 +8,10 @@ export interface AdviceMessage {
 export const SCENARIOS = [
   "can't sleep",
   "moving to a new city",
-  "feeling lonely",
-  "failing an exam",
+  "feeling extremely bored",
+  "having a big exam",
   "starting a new job",
-  "heartbroken",
+  "procrastinating on a project",
   "celebrating a win",
   "feeling overwhelmed",
   "losing a friend",
